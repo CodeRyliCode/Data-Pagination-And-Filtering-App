@@ -33,15 +33,20 @@ function showPage(list, page) {
 
       if ([i] >= startIndex && [i] < endIndex) {
          let li = document.createElement('li');
-         li.className = 'student-item cf';
+
+         /*Using "classList", you can add or remove a class without affecting any others the element 
+         may have. But if you assign "className", it will wipe out any existing classes while adding 
+         the new one (or if you assign an empty string it will wipe out all of them */
+         
+         li.classList.add('student-item', 'cf');
          studentList.append(li);
 
          let studentlistDiv = document.createElement('div');
-         studentlistDiv.className = 'student-details';
+         studentlistDiv.classList.add('student-details');
          li.append(studentlistDiv);
 
          let img = document.createElement('img');
-         img.className = 'avatar';
+         img.classList.add('avatar');
          img.src = data[i].picture.medium;
          img.alt = 'Profile Picture';
          studentlistDiv.append(img);
@@ -51,16 +56,16 @@ function showPage(list, page) {
          studentlistDiv.append(h3);
 
          let spanEmail = document.createElement('span');
-         spanEmail.className = 'email';
+         spanEmail.classList.add('email');
          spanEmail.innerHTML = data[i].email;
          studentlistDiv.append(spanEmail);
 
          let joineddetailsDiv = document.createElement('div');
-         joineddetailsDiv.className = 'joined-details';
+         joineddetailsDiv.classList.add('joined-details');
          li.append(joineddetailsDiv);
 
          let spanDate = document.createElement('span');
-         spanDate.className = 'date';
+         spanDate.classList.add('date');
          spanDate.innerHTML = 'Joined' + ' ' + data[i].registered.date;
          joineddetailsDiv.append(spanDate);
 
@@ -98,7 +103,7 @@ function addPagination(list) {
 
       //setting the first button as active 
       let firstactiveButton = document.querySelector('button');
-      firstactiveButton.className = 'active';
+      firstactiveButton.classList.add('active');
        
    }
    /* event listener that checks which button is clicked and adds
@@ -107,9 +112,9 @@ function addPagination(list) {
    linkList.addEventListener('click', (e) => {
    
       if (e.target.tagName === "BUTTON") {
-         let activeClass = document.querySelector(".active");
-         activeClass.className = '';
-         e.target.className = "active";
+         let activeClass = document.querySelector('.active');
+         activeClass.className = ('');
+         e.target.classList.add('active');
          showPage(list, e.target.textContent);
    
    }
