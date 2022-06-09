@@ -14,16 +14,23 @@ For assistance:
 
 
 /*
-Create the `showPage` function
-This function will create and insert/append the elements needed to display a "page" of nine students
-*/
+This function will be used to create
+and append elements to the DOM so we can display a page of
+9 students.*/
 
 function showPage(list, page) {
    const startIndex = (page * 9) - 9;
    const endIndex = (page * 9);
    let studentList = document.querySelector('.student-list');
    studentList.innerHTML = '';
+
+   //   We are looping through the student data 
    for (let i = 0; i < list.length; i++) {
+
+      /* using a conditional statement to create and
+      append the elements needed to display the student information
+      as we are looping through the student data */
+
       if ([i] >= startIndex && [i] < endIndex) {
          let li = document.createElement('li');
          li.className = 'student-item cf';
@@ -67,8 +74,9 @@ function showPage(list, page) {
 
 
 /*
-Create the `addPagination` function
-This function will create and insert/append the elements needed for the pagination buttons
+This function will dynamically create and append page buttons
+with 9 students per page. We will be able to see the current page's
+button that we click and see that it is active and highlighted
 */
 
 function addPagination(list) {
@@ -77,7 +85,9 @@ function addPagination(list) {
    let linkList = document.querySelector('.link-list');
    linkList.innerHTML = '';
 
+   //looping through the pages
    for (let i = 1; i <= numberofPages; i++) {
+      //creating and appending the pagination elements
       let li2 = document.createElement('li');
       linkList.append(li2);
    
@@ -85,11 +95,15 @@ function addPagination(list) {
       pageButtons.type = 'button';
       pageButtons.innerHTML = [i];
       li2.append(pageButtons);
+
+      //setting the first button as active 
       let firstactiveButton = document.querySelector('button');
       firstactiveButton.className = 'active';
        
    }
-   
+   /* event listener that checks which button is clicked and adds
+   the button class as active. */
+
    linkList.addEventListener('click', (e) => {
    
       if (e.target.tagName === "BUTTON") {
@@ -103,8 +117,9 @@ function addPagination(list) {
    });
    
    }
+   // Calling the functions
+
    showPage(data, 1);
    addPagination(data);
 
    
-// Call functions
