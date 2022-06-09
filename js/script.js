@@ -77,5 +77,19 @@ function addPagination(list) {
    let linkList = document.querySelector('.link-list');
    linkList.innerHTML = '';
 
+   for (let i = 1; i <= numberofPages; i++) {
+      let li2 = document.createElement('li');
+      linkList.append(li2);
+   
+      let pageButtons = document.createElement('button');
+      pageButtons.type = 'button';
+      pageButtons.innerHTML = [i];
+      li2.append(pageButtons);
+      let firstactiveButton = document.querySelector('button');
+      firstactiveButton.className = 'active';
+       
+   }
+   
+}
    
 // Call functions
