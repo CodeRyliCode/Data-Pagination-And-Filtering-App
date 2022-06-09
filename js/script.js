@@ -24,7 +24,10 @@ function showPage(list, page) {
    let studentList = document.querySelector('.student-list');
    studentList.innerHTML = '';
    for(let i = 0; i < list.length; i++) {
- 
+      if([i] >= startIndex && [i] < endIndex) {
+         let li = document.createElement('li');
+         li.className = 'student-item cf';
+      }
    }
 
 }
