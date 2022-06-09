@@ -72,7 +72,10 @@ This function will create and insert/append the elements needed for the paginati
 */
 
 function addPagination(list) {
-   
-}
+
+   let numberofPages = Math.ceil(list.length / 9);
+   let linkList = document.querySelector('.link-list');
+   linkList.innerHTML = '';
+
    
 // Call functions
