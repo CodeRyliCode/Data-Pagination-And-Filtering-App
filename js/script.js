@@ -90,6 +90,21 @@ function addPagination(list) {
        
    }
    
-}
+   linkList.addEventListener('click', (e) => {
+   
+      if (e.target.tagName === "BUTTON") {
+         let activeClass = document.querySelector(".active");
+         activeClass.className = '';
+         e.target.className = "active";
+         showPage(list, e.target.textContent);
+   
+   }
+   
+   });
+   
+   }
+   showPage(data, 1);
+   addPagination(data);
+
    
 // Call functions
