@@ -13,6 +13,26 @@ For assistance:
 
 
 
+const header = document.querySelector('header');
+const h3 = document.createElement('h3'); 
+h3.textContent = "No Results Found";
+h3.className = "no-results";
+h3.style.display = 'none';
+header.insertAdjacentElement("afterend", h3);
+
+
+function displayElement (list) {
+
+   if(list.length === 0) {
+      h3.style.display = '';
+
+   } else {
+      h3.style.display = 'none';
+   }
+}
+
+
+
 /*
 This function will be used to create
 and append elements to the DOM so we can display a page of
@@ -47,17 +67,17 @@ function showPage(list, page) {
 
          let img = document.createElement('img');
          img.classList.add('avatar');
-         img.src = data[i].picture.medium;
+         img.src = list[i].picture.medium;
          img.alt = 'Profile Picture';
          studentlistDiv.append(img);
 
          let h3 = document.createElement('h3');
-         h3.innerHTML = data[i].name.first + ' ' + data[i].name.last;
+         h3.innerHTML = list[i].name.first + ' ' + list[i].name.last;
          studentlistDiv.append(h3);
 
          let spanEmail = document.createElement('span');
          spanEmail.classList.add('email');
-         spanEmail.innerHTML = data[i].email;
+         spanEmail.innerHTML = list[i].email;
          studentlistDiv.append(spanEmail);
 
          let joineddetailsDiv = document.createElement('div');
@@ -66,7 +86,7 @@ function showPage(list, page) {
 
          let spanDate = document.createElement('span');
          spanDate.classList.add('date');
-         spanDate.innerHTML = 'Joined' + ' ' + data[i].registered.date;
+         spanDate.innerHTML = 'Joined' + ' ' + list[i].registered.date;
          joineddetailsDiv.append(spanDate);
 
 
@@ -127,4 +147,76 @@ function addPagination(list) {
    showPage(data, 1);
    addPagination(data);
 
+
+
+   // creates search bar 
+let label = document.createElement('label');
+label.htmlFor = ('search');
+label.classList.add('student-search');
+header.append(label);
+
+let span = document.createElement('span');
+span.innerHTML = ('Search by name');
+label.append(span);
+
+let input = document.createElement('input');
+input.id = ('search');
+input.placeholder = ('Search by name...');
+label.append(input);
+
+let button = document.createElement('button');
+button.type = ('button');
+label.append(button);
+
+let img = document.createElement('img');
+img.src = ('img/icn-search.svg');
+img.alt = ('Search icon');
+button.append(img);
+
+
+
+
+function searchFunction(searchInput, list) {
+
+   let newStudentList = [];
    
+   for(let i=0; i < list.length; i++) {
+      let firstName = list[i].name.first.toLowerCase();
+      let lastName = list[i].name.last.toLowerCase();
+      console.log(firstName);
+console.log(lastName);
+      if(firstName.includes(searchInput.value.toLowerCase()) || lastName.includes(searchInput.value.toLowerCase()) ){
+         newStudentList.push(list[i]);
+      }       
+   }
+
+   displayElement(newStudentList);
+   showPage(newStudentList, 1)
+   addPagination(newStudentList);
+
+
+   console.log(newStudentList);
+
+
+console.log(displayElement(newStudentList));
+console.log(showPage(newStudentList, 1))
+console.log(addPagination(newStudentList));
+
+}
+
+
+
+
+search.addEventListener('keyup', () => {
+
+   if(search.value.length != 0) {
+         searchFunction(search, data);
+      } else {
+         showPage(data, 1)
+         addPagination(data);
+      }
+
+ });
+
+
+
